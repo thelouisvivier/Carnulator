@@ -34,7 +34,7 @@
             app:srcCompat="@drawable/ambree33" />
 
         <Button
-            android:id="@+id/okCA33"
+            android:id="@+id/okButton"
             android:layout_width="53dp"
             android:layout_height="53dp"
             android:layout_marginEnd="8dp"
@@ -103,7 +103,7 @@
             android:layout_marginBottom="24dp"
             android:text="+"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/okCA33"
+            app:layout_constraintEnd_toStartOf="@+id/okButton"
             app:layout_constraintStart_toEndOf="@+id/numberOfBottles" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

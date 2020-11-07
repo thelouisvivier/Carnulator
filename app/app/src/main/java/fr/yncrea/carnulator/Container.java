@@ -9,21 +9,22 @@ import java.util.ArrayList;
 
 
 public class Container {
-    protected EditText m_numberDisplay;
-    protected SeekBar m_seekBar;
-    protected int m_nb;
-    protected int m_price;
-    protected Button m_plus;
-    protected Button m_minus;
-    protected Button m_ok;
+    public EditText m_numberDisplay;
+    public SeekBar m_seekBar;
+    public CarnutesBottle m_bottle;
+    public Button m_plus;
+    public Button m_minus;
+    public Button m_ok;
+    public int m_nbBeer;
 
-    public Container(EditText number, Button plus, Button minus, Button ok, SeekBar seekBar){
+    public Container(EditText number, CarnutesBottle bottle, Button plus, Button minus, Button ok, SeekBar seekBar){
         this.m_numberDisplay = number;
         this.m_minus = minus;
         this.m_plus = plus;
         this.m_ok = ok;
         this.m_seekBar = seekBar;
-        this.m_nb = 0;
+        this.m_nbBeer = 0;
+        this.m_bottle = bottle;
 
         ok.setOnClickListener(onClickOk());
         plus.setOnClickListener(onClickPlus(1));
@@ -37,7 +38,7 @@ public class Container {
     }
 
     public void setM_nb(int m_nb) {
-        this.m_nb = m_nb;
+        this.m_nbBeer = m_nb;
     }
 
     private SeekBar.OnSeekBarChangeListener onClickSeekBar() {
@@ -93,8 +94,8 @@ public class Container {
 
     public double calculate(ArrayList<Container> containers){
         double total = 0;
-        for(fr.yncrea.carnulator.Container container : containers){
-            total += container.m_nb*container.m_price;
+        for(Container container : containers){
+            total += container.m_nbBeer*container.m_bottle.getM_price();
         }
         return total;
     }

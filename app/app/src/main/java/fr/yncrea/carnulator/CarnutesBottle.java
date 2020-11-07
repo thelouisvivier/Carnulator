@@ -17,6 +17,10 @@ public class CarnutesBottle {
         this.m_price = price;
     }
 
+    public double getM_price() {
+        return m_price;
+    }
+
     public String getM_name() {
         return m_name;
     }

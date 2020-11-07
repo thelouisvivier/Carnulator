@@ -3,12 +3,16 @@ package fr.yncrea.carnulator;
 
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import fr.yncrea.carnulator.fragment.ContainerFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,8 +25,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.carnutes_item);
-        initialise();
+        if(savedInstanceState == null){
+            Toast.makeText(this,"PAUUUUUUUUUUUUUL" , Toast.LENGTH_LONG).show();
+            getSupportFragmentManager().beginTransaction().add(R.id.containerCarnutes,new ContainerFragment()).commit();
+        }
+        //setContentView(R.layout.carnutes_item);
+        //initialise();
     }
 
     @Override

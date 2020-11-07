@@ -3,7 +3,6 @@ package fr.yncrea.carnulator;
 
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         textOfAmbreeCarnutes33.setText( (String.valueOf(0)));
 
 
-        final Button ok = findViewById(R.id.okCA33);
+        final Button ok = findViewById(R.id.okButton);
         final Button plus = findViewById(R.id.plusButton);
         final Button minus = findViewById(R.id.minusButton);
         final SeekBar seekBar = findViewById(R.id.seekBarNumberOfBottle);

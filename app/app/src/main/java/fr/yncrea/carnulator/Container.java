@@ -32,6 +32,10 @@ public class Container {
         seekBar.setOnSeekBarChangeListener(onClickSeekBar());
     }
 
+    public Container(View view){
+        m_ok = (Button) view.findViewById(R.id.okButton);
+    }
+
 
     public EditText getM_numberDisplay() {
         return m_numberDisplay;

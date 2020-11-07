@@ -1,33 +1,41 @@
 package fr.yncrea.carnulator.adapter;
 
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 
 import java.util.List;
 
 import fr.yncrea.carnulator.ApplicationActivity;
+import fr.yncrea.carnulator.CarnutesBottle;
 import fr.yncrea.carnulator.Container;
+import fr.yncrea.carnulator.R;
 
-public class ContainerAdapter /*extends BaseAdapter implements View.OnClickListener*/ {
+public class ContainerAdapter extends BaseAdapter /*implements View.OnClickListener*/ {
     List<Container> mCarnutesList;
     private final LayoutInflater mInflater;
     //private itemListener mListener;
 
-    public ContainerAdapter(LayoutInflater mInflater) {
+    public ContainerAdapter(List<Container> carnutesList) {
+        mCarnutesList = carnutesList;
         this.mInflater = LayoutInflater.from(ApplicationActivity.getContext());
     }
 
    /* public void setmListener(TweetListener mListener) {
         this.mListener = mListener;
     }
+    */
+
 
     @Override
     public int getCount() {
-        return null != mTweets ? mTweets.size() : 0;
+        return null != mCarnutesList ? mCarnutesList.size() : 0;
     }
 
     @Override
     public Object getItem(int position) {
-        return null != mTweets ? mTweets.get(position) : null;
+        return null != mCarnutesList ? mCarnutesList.get(position) : null;
     }
 
     @Override
@@ -38,17 +46,20 @@ public class ContainerAdapter /*extends BaseAdapter implements View.OnClickListe
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
+        Container carnutesType;
         //scrolling
         if(null == convertView){
-            convertView = mInflater.inflate(R.layout.tweet_listitem,null);
-            holder = new ViewHolder(convertView);
-            convertView.setTag(holder);
+            convertView = mInflater.inflate(R.layout.carnutes_item,null);
+            carnutesType= new Container(convertView);
+            convertView.setTag(carnutesType);
         }
         else {
             holder = (ViewHolder)convertView.getTag();
         }
 
-        final Tweet tweet = (Tweet) getItem(position);
+        final CarnutesBottle carnutesBottle = (CarnutesBottle) getItem(position);
+
+        carnutesType.m_bottle.setName(carnutesBottle.getM_name());
 
         holder.name.setText(tweet.user.name);
         holder.alias.setText(tweet.user.screenName);
@@ -72,22 +83,7 @@ public class ContainerAdapter /*extends BaseAdapter implements View.OnClickListe
         }
     }
 
-    private class ViewHolder{
-        public ImageView image;
-        public TextView name;
-        public TextView alias;
-        public TextView text;
-        public Button button;
-
-        public ViewHolder(View view){
-            image = (ImageView) view.findViewById(R.id.tweetListItemImageView);
-            name = (TextView) view.findViewById(R.id.tweetListItemNameTextView);
-            alias = (TextView) view.findViewById(R.id.textListItemAliasTextView);
-            text = (TextView) view.findViewById(R.id.tweetListItemTextTextView);
-            button = (Button) view.findViewById(R.id.tweetListItemButtonTextView);
-        }
-
-    }*/
+   
 
 
 }

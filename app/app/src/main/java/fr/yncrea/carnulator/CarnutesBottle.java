@@ -25,6 +25,10 @@ public class CarnutesBottle {
         return m_name;
     }
 
+    public void setM_name(String m_name) {
+        this.m_name = m_name;
+    }
+
     public static List<CarnutesBottle> getListOfBottle(){
         ArrayList<CarnutesBottle> listOfCarnutesBottles = new ArrayList<>() ;
 

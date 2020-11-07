@@ -1,5 +1,6 @@
 package fr.yncrea.carnulator.adapter;
 
+import android.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +11,12 @@ import java.util.List;
 import fr.yncrea.carnulator.ApplicationActivity;
 import fr.yncrea.carnulator.CarnutesBottle;
 import fr.yncrea.carnulator.Container;
+import fr.yncrea.carnulator.MainActivity;
 import fr.yncrea.carnulator.R;
 
 public class ContainerAdapter extends BaseAdapter /*implements View.OnClickListener*/ {
-    List<Container> mCarnutesList;
+    public static List<Container> mCarnutesList;
+
     private final LayoutInflater mInflater;
     //private itemListener mListener;
 
@@ -43,9 +46,10 @@ public class ContainerAdapter extends BaseAdapter /*implements View.OnClickListe
         return position;
     }
 
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
+        //ViewHolder holder;
         Container carnutesType;
         //scrolling
         if(null == convertView){
@@ -54,26 +58,48 @@ public class ContainerAdapter extends BaseAdapter /*implements View.OnClickListe
             convertView.setTag(carnutesType);
         }
         else {
-            holder = (ViewHolder)convertView.getTag();
+            //holder = (ViewHolder)convertView.getTag();
+            carnutesType = (Container)convertView.getTag();
+
         }
 
         final CarnutesBottle carnutesBottle = (CarnutesBottle) getItem(position);
 
-        carnutesType.m_bottle.setName(carnutesBottle.getM_name());
+        carnutesType.setPrice(carnutesBottle.getM_price());
 
-        holder.name.setText(tweet.user.name);
-        holder.alias.setText(tweet.user.screenName);
-        holder.text.setText(tweet.text);
-        holder.button.setTag(position);
-        holder.button.setOnClickListener(this);
+        //carnutesType.m_bottle.setName(carnutesBottle.getM_name());
 
-        if(!tweet.user.profileImageUrl.isEmpty()){
-            Picasso.get().load(tweet.user.profileImageUrl).fit().into(holder.image);
-        }
+        //holder.name.setText(tweet.user.name);
+        //holder.alias.setText(tweet.user.screenName);
+        //holder.text.setText(tweet.text);
+        //holder.button.setTag(position);
+        //holder.button.setOnClickListener(this);
+
+        //if(!tweet.user.profileImageUrl.isEmpty()){
+        //    Picasso.get().load(tweet.user.profileImageUrl).fit().into(holder.image);
+        //}
 
         return convertView;
     }
 
+    //Calculate total price of all bottles
+
+    public static double calculate(){
+        double total = 0;
+        for(Container container : mCarnutesList){
+            total += Integer.valueOf(String.valueOf(container.itemNumberBottle.getText()))*container.getPrice();
+        }
+        return total;
+    }
+/*
+    public void displayTotal(){
+        .setSubtitle("TOTAL : " + String.valueOf(calculate()) + " €");
+        totalEditText.setText(String.valueOf(total));
+    }
+
+ */
+
+/*
     @Override
     public void onClick(View v) {
         int position = (Integer) v.getTag();
@@ -83,7 +109,7 @@ public class ContainerAdapter extends BaseAdapter /*implements View.OnClickListe
         }
     }
 
-   
+   */
 
 
 }

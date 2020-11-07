@@ -1,29 +1,36 @@
 package fr.yncrea.carnulator;
 
+import android.media.Image;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 
 public class Container {
-    public EditText m_numberDisplay;
+
     public SeekBar m_seekBar;
-    public CarnutesBottle m_bottle;
+    //public CarnutesBottle m_bottle;
+    public ImageView imgItem;
+    public TextView itemTextNameBottle;
+    public TextView itemNumberBottle;
     public Button m_plus;
     public Button m_minus;
     public Button m_ok;
-    public int m_nbBeer;
+    private double price;
 
+    //See if we need it, else To delete
+/*
     public Container(EditText number, CarnutesBottle bottle, Button plus, Button minus, Button ok, SeekBar seekBar){
-        this.m_numberDisplay = number;
+
         this.m_minus = minus;
         this.m_plus = plus;
         this.m_ok = ok;
         this.m_seekBar = seekBar;
-        this.m_nbBeer = 0;
         this.m_bottle = bottle;
 
         ok.setOnClickListener(onClickOk());
@@ -31,27 +38,33 @@ public class Container {
         minus.setOnClickListener(onClickPlus(-1));
         seekBar.setOnSeekBarChangeListener(onClickSeekBar());
     }
+*/
+
 
     public Container(View view){
+        m_seekBar = (SeekBar) view.findViewById(R.id.seekBarNumberOfBottle);
+        imgItem = (ImageView) view.findViewById(R.id.imageViewItem);
+        itemTextNameBottle = (TextView) view.findViewById(R.id.itemTextNameBottle);
+        itemNumberBottle = (TextView) view.findViewById(R.id.numberOfBottles);
         m_ok = (Button) view.findViewById(R.id.okButton);
+        m_plus = (Button) view.findViewById(R.id.plusButton);
+        m_minus = (Button) view.findViewById(R.id.minusButton);
+
     }
 
-
-    public EditText getM_numberDisplay() {
-        return m_numberDisplay;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    public void setM_nb(int m_nb) {
-        this.m_nbBeer = m_nb;
+    public double getPrice() {
+        return price;
     }
 
     private SeekBar.OnSeekBarChangeListener onClickSeekBar() {
         return new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                getM_numberDisplay().setText( (String.valueOf(progress)));
-
-                setM_nb(Integer.valueOf(String.valueOf(progress)));
+                itemNumberBottle.setText(String.valueOf(progress));
                 //calculate();
                 //displayTotal();
             }
@@ -73,9 +86,7 @@ public class Container {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getM_numberDisplay().setText( String.valueOf(Integer.valueOf(String.valueOf(getM_numberDisplay().getText()))+plusOrMinus));
-
-                setM_nb(Integer.valueOf(String.valueOf(getM_numberDisplay().getText())));
+                itemNumberBottle.setText(String.valueOf(Integer.valueOf(String.valueOf(itemNumberBottle.getText()))+plusOrMinus));
 
                 //calculate();
                 //displayTotal();
@@ -88,14 +99,16 @@ public class Container {
             @Override
             public void onClick(View view) {
 
-                setM_nb(Integer.valueOf(String.valueOf(getM_numberDisplay().getText())));
 
-               // double total = calculate();
+                itemNumberBottle.setText(Integer.valueOf(String.valueOf(itemNumberBottle.getText())));
+                // double total = calculate();
                 //displayTotal(total,totalDisplay);
             }
         };
     }
 
+    //Calculate total price of all bottles
+    /*
     public double calculate(ArrayList<Container> containers){
         double total = 0;
         for(Container container : containers){
@@ -107,6 +120,8 @@ public class Container {
     public void displayTotal(double total, EditText totalEditText){
         totalEditText.setText(String.valueOf(total));
     }
+    */
+
 
 
 

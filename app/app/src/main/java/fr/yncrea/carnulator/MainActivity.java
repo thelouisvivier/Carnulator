@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import fr.yncrea.carnulator.adapter.ContainerAdapter;
 import fr.yncrea.carnulator.fragment.ContainerFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -119,6 +120,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void displayTotal(){
-        getSupportActionBar().setSubtitle("TOTAL : " + String.valueOf(total) + " €");
+        getSupportActionBar().setSubtitle("TOTAL : " + String.valueOf(ContainerAdapter.calculate()) + " €");
     }
 }

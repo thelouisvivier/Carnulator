@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
@@ -17,12 +16,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.stream.Collectors;
 
 import fr.yncrea.carnulator.api.CarnutesApiService;
 import fr.yncrea.carnulator.database.BeersDatabase;
 import fr.yncrea.carnulator.model.Beer;
-import fr.yncrea.carnulator.model.CarnutesAPIBeers;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -36,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private double total = 0;
 
     private BeersDatabase db;
-    private CarnutesApiService swapiService;
+    private CarnutesApiService carnutesApiService;
     private Executor backgroundExecutor = Executors.newSingleThreadExecutor();
 
 
@@ -50,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 .baseUrl("https://carnulator-b911.restdb.io/rest/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        swapiService = retrofit.create(CarnutesApiService.class);
+        carnutesApiService = retrofit.create(CarnutesApiService.class);
 
         //New thread pour la bdd
         backgroundExecutor.execute(()-> {
@@ -161,9 +158,9 @@ public class MainActivity extends AppCompatActivity {
     private void loadFromApiAndSave(){
         // Recup bières depuis API
         try {
-            Response<CarnutesAPIBeers> response = swapiService.getBeers().execute();
+            Response<List<Beer>> response = carnutesApiService.getBeers().execute();
             if(response.isSuccessful()){
-                List<Beer> beers = response.body().results;
+                List<Beer> beers = response.body();
                 Log.w("Carnutes APP","Bières: "+ beers.size());
 
                 // Save beer bdd
@@ -182,10 +179,5 @@ public class MainActivity extends AppCompatActivity {
     private void updateBeersList(){
         // Récupération
         List<Beer> beers = db.BeersDao().getAllBeers();
-        //String text = beers.stream().map(Beer::toString).collect(Collectors.joining("\n"));
-        /*runOnUiThread(()-> {
-            TextView helloTextView = findViewById(R.id.helloTextView);
-            helloTextView.setText(text);
-        });*/
     }
 }

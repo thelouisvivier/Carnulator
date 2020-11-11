@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import fr.yncrea.carnulator.R;
@@ -17,7 +18,7 @@ import fr.yncrea.carnulator.R;
  * Use the {@link ContainerFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ContainerFragment extends Fragment {
+public class ContainerFragment extends Fragment /*implements  AdapterView.OnItemClickListener*/  {
     private ListView mListOfContainer;
 
 
@@ -67,8 +68,25 @@ public class ContainerFragment extends Fragment {
         // Inflate the layout for this fragment
         Log.v("LALALASCHTROUMPF","aie aie");
         View rootView = inflater.inflate(R.layout.fragment_container, container, false);
-        //mListOfContainer = (ListView) rootView.findViewById(R.id.containerListView);
+        mListOfContainer = (ListView) rootView.findViewById(R.id.containerListView);
+        //mListOfContainer.setOnItemClickListener(this);
 
     return rootView;
     }
+
+    //@Override
+    //public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    //}
+    /*
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Tweet tweet = (Tweet) mListView.getItemAtPosition((position));
+        if(mTweetListener != null) {
+            mTweetListener.onViewTweet(tweet);
+        }
+    }
+
+     */
+
 }

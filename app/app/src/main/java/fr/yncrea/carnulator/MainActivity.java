@@ -15,18 +15,20 @@ import fr.yncrea.carnulator.adapter.ContainerAdapter;
 import fr.yncrea.carnulator.fragment.ContainerFragment;
 
 public class MainActivity extends AppCompatActivity {
-
+    /*
     private double prixCarnutesAmbree33 = 2;
     private int nbCarnutesAmbree33 = 0;
     private double prixCarnutesAmbree75 = 2.7;
     private int nbCarnutesAmbree75 = 0;
     private double total = 0;
 
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if(savedInstanceState == null){
-            Toast.makeText(this,"PAUUUUUUUUUUUUUL" , Toast.LENGTH_LONG).show();
+            //Toast.makeText(this,"PAUUUUUUUUUUUUUL" , Toast.LENGTH_LONG).show();
             getSupportFragmentManager().beginTransaction().add(R.id.containerCarnutes,new ContainerFragment()).commit();
         }
         //setContentView(R.layout.carnutes_item);
@@ -66,9 +68,9 @@ public class MainActivity extends AppCompatActivity {
                 EditText textOfAmbreeCarnutes33 = findViewById(R.id.numberOfBottles);
                 textOfAmbreeCarnutes33.setText( (String.valueOf(progress)));
 
-                nbCarnutesAmbree33 = Integer.valueOf(String.valueOf(progress));
-                calculate();
-                displayTotal();
+                //nbCarnutesAmbree33 = Integer.valueOf(String.valueOf(progress));
+                //calculate();
+                //displayTotal();
             }
 
             @Override
@@ -92,10 +94,10 @@ public class MainActivity extends AppCompatActivity {
                 final EditText textOfAmbreeCarnutes33 = findViewById(R.id.numberOfBottles);
                 textOfAmbreeCarnutes33.setText( String.valueOf(Integer.valueOf(String.valueOf(textOfAmbreeCarnutes33.getText()))+plusOrMinus));
 
-                nbCarnutesAmbree33 = Integer.valueOf(String.valueOf(textOfAmbreeCarnutes33.getText()));
+                //nbCarnutesAmbree33 = Integer.valueOf(String.valueOf(textOfAmbreeCarnutes33.getText()));
 
-                calculate();
-                displayTotal();
+                //calculate();
+                //displayTotal();
             }
         };
     }
@@ -106,20 +108,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                nbCarnutesAmbree33 = Integer.valueOf(String.valueOf(textOfAmbreeCarnutes33.getText()));
+                //nbCarnutesAmbree33 = Integer.valueOf(String.valueOf(textOfAmbreeCarnutes33.getText()));
 
-                calculate();
-                displayTotal();
+                //calculate();
+                //displayTotal();
             }
         };
     }
 
-    protected void calculate(){
+    /*protected void calculate(){
         total = nbCarnutesAmbree33*prixCarnutesAmbree33 + nbCarnutesAmbree75*prixCarnutesAmbree75;
 
-    }
+    }*/
 
+    /*
     protected void displayTotal(){
         getSupportActionBar().setSubtitle("TOTAL : " + String.valueOf(ContainerAdapter.calculate()) + " €");
-    }
+    }*/
 }

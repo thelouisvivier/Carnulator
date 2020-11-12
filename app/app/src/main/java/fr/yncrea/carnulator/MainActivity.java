@@ -3,12 +3,26 @@ package fr.yncrea.carnulator;
 
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
+import fr.yncrea.carnulator.api.CarnutesApiService;
+import fr.yncrea.carnulator.database.BeersDatabase;
+import fr.yncrea.carnulator.model.Beer;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,10 +32,35 @@ public class MainActivity extends AppCompatActivity {
     private int nbCarnutesAmbree75 = 0;
     private double total = 0;
 
+    // API UTILITIES //
+    private BeersDatabase db;
+    private CarnutesApiService carnutesApiService;
+    private Executor backgroundExecutor = Executors.newSingleThreadExecutor();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.carnutes_item);
+
+        // ********  BEGIN API PART ******** //
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://carnulator-b911.restdb.io/rest/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        carnutesApiService = retrofit.create(CarnutesApiService.class);
+
+        //New thread pour la bdd
+        backgroundExecutor.execute(()-> {
+            db = Room.databaseBuilder(getApplicationContext(), BeersDatabase.class, "beers_database.db").build();
+        });
+
+        backgroundExecutor.execute(()-> {
+            loadFromApiAndSave();
+        });
+        // ********  END API PART ******** //
+
+
         initialise();
     }
 
@@ -114,4 +153,28 @@ public class MainActivity extends AppCompatActivity {
     protected void displayTotal(){
         getSupportActionBar().setSubtitle("TOTAL : " + String.valueOf(total) + " €");
     }
+
+
+    // ********  BEGIN API PART ******** //
+    private void loadFromApiAndSave(){
+        // Recup bières depuis API
+        try {
+            Response<List<Beer>> response = carnutesApiService.getBeers().execute();
+            if(response.isSuccessful()){
+                List<Beer> beers = response.body();
+                Log.w("Carnutes APP","Bières: "+ beers.size());
+
+                // Save beer bdd
+                for(Beer beer : beers){
+                    db.BeersDao().insert(beer);
+                }
+            }
+            else{
+                Log.w("Carnutes APP","Il y a eu un soucis avec la requête");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    // ********  END API PART ******** //
 }

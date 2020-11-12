@@ -29,9 +29,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         if(savedInstanceState == null){
             //Toast.makeText(this,"PAUUUUUUUUUUUUUL" , Toast.LENGTH_LONG).show();
+            setContentView(R.layout.activity_main);
             getSupportFragmentManager().beginTransaction().add(R.id.containerCarnutes,new ContainerFragment()).commit();
+
         }
-        //setContentView(R.layout.carnutes_item);
         //initialise();
     }
 

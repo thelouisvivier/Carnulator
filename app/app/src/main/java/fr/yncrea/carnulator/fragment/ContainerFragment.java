@@ -66,7 +66,7 @@ public class ContainerFragment extends Fragment /*implements  AdapterView.OnItem
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        Log.v("LALALASCHTROUMPF","aie aie");
+        //Log.v("LALALASCHTROUMPF","aie aie");
         View rootView = inflater.inflate(R.layout.fragment_container, container, false);
         mListOfContainer = (ListView) rootView.findViewById(R.id.containerListView);
         //mListOfContainer.setOnItemClickListener(this);

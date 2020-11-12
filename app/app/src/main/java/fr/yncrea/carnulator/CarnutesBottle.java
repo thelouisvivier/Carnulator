@@ -44,6 +44,7 @@ public class CarnutesBottle {
         listOfCarnutesBottles.add(new CarnutesBottle("Carnutes Rousse 75cL",4,"rousse75"));
         listOfCarnutesBottles.add(new CarnutesBottle("Carnutes Blonde 33cL",2,"blonde33"));
         listOfCarnutesBottles.add(new CarnutesBottle("Carnutes Blonde 75cL",4,"blonde75"));
+        listOfCarnutesBottles.add(new CarnutesBottle("Carnutes Ambrée 33cL",2,"ambree33"));
         listOfCarnutesBottles.add(new CarnutesBottle("Carnutes Ambrée 75cL",4,"ambree75"));
         listOfCarnutesBottles.add(new CarnutesBottle("Carnutes Triple 33cL",2.5,"triple33"));
         listOfCarnutesBottles.add(new CarnutesBottle("Carnutes Triple 75cL",5,"triple75"));

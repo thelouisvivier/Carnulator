@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private int nbCarnutesAmbree75 = 0;
     private double total = 0;
 
+    // API UTILITIES //
     private BeersDatabase db;
     private CarnutesApiService carnutesApiService;
     private Executor backgroundExecutor = Executors.newSingleThreadExecutor();
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.carnutes_item);
 
-        //Create API Call
+        // ********  BEGIN API PART ******** //
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://carnulator-b911.restdb.io/rest/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -56,10 +57,9 @@ public class MainActivity extends AppCompatActivity {
 
         backgroundExecutor.execute(()-> {
             loadFromApiAndSave();
-            //Enregistrement bière en BDD
-            //Affichage données en BDD
-            updateBeersList();
         });
+        // ********  END API PART ******** //
+
 
         initialise();
     }
@@ -154,7 +154,8 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setSubtitle("TOTAL : " + String.valueOf(total) + " €");
     }
 
-    // API
+
+    // ********  BEGIN API PART ******** //
     private void loadFromApiAndSave(){
         // Recup bières depuis API
         try {
@@ -175,9 +176,5 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-    private void updateBeersList(){
-        // Récupération
-        List<Beer> beers = db.BeersDao().getAllBeers();
-    }
+    // ********  END API PART ******** //
 }

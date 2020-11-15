@@ -29,6 +29,10 @@ public class CarnutesBottle {
         this.m_name = m_name;
     }
 
+    public String getM_imageUrl() {
+        return m_imageUrl;
+    }
+
     public static List<CarnutesBottle> getListOfBottle(){
         ArrayList<CarnutesBottle> listOfCarnutesBottles = new ArrayList<>() ;
 
@@ -44,10 +48,10 @@ public class CarnutesBottle {
 
         for(String c : cl){
             for(String t : type){
-                listOfCarnutesBottles.add(new fr.yncrea.carnulator.CarnutesBottle("Carnutes " + t + " " + c + "cL",2,t+c));
+                listOfCarnutesBottles.add(new fr.yncrea.carnulator.CarnutesBottle("Carnutes " + t + " " + c + "cL",2,"https://carnutes.pagesperso-orange.fr/WEFiles/Image/WEImage/ambree33-b97fe29b.png"));
             }
         }
-        /**
+        /*
         listOfCarnutesBottles.add(new CarnutesBottle("Carnutes Rousse 33cL",2,"rousse33"));
         listOfCarnutesBottles.add(new CarnutesBottle("Carnutes Rousse 75cL",4,"rousse75"));
         listOfCarnutesBottles.add(new CarnutesBottle("Carnutes Blonde 33cL",2,"blonde33"));
@@ -57,7 +61,7 @@ public class CarnutesBottle {
         listOfCarnutesBottles.add(new CarnutesBottle("Carnutes Triple 33cL",2.5,"triple33"));
         listOfCarnutesBottles.add(new CarnutesBottle("Carnutes Triple 75cL",5,"triple75"));
         listOfCarnutesBottles.add(new CarnutesBottle("Carnutes Brune 33cL",2.5,"brune33"));
-        listOfCarnutesBottles.add(new CarnutesBottle("Carnutes Brune 75cL",5,"brune75"));**/
+        listOfCarnutesBottles.add(new CarnutesBottle("Carnutes Brune 75cL",5,"brune75"));*/
 
         return listOfCarnutesBottles;
     }

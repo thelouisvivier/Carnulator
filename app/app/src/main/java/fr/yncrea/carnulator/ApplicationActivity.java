@@ -11,6 +11,7 @@ public class ApplicationActivity extends Application {
     public void onCreate(){
         super.onCreate();
 
+
         // Keep a reference to the application context
         sContext = getApplicationContext();
     }
@@ -20,7 +21,7 @@ public class ApplicationActivity extends Application {
         return sContext;
     }
 
-    public static class WLTwitterLoginActivity extends Activity {
+    public static class ApplicationCarnuteActivity extends Activity {
 
     }
 }

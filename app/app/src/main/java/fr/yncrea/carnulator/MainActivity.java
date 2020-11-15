@@ -1,6 +1,7 @@
 
 package fr.yncrea.carnulator;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
      */
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
             //Toast.makeText(this,"PAUUUUUUUUUUUUUL" , Toast.LENGTH_LONG).show();
             setContentView(R.layout.activity_main);
             getSupportFragmentManager().beginTransaction().add(R.id.containerCarnutes,new ContainerFragment()).commit();
-
         }
+
         //initialise();
     }
 
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
     }
 
-    protected void initialise(){
+    /*protected void initialise(){
         EditText textOfAmbreeCarnutes33 = findViewById(R.id.numberOfBottles);
         textOfAmbreeCarnutes33.setInputType(InputType.TYPE_CLASS_NUMBER);
         textOfAmbreeCarnutes33.setText( (String.valueOf(0)));
@@ -62,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+     */
+    /*
     private SeekBar.OnSeekBarChangeListener onClickSeekBar() {
         return new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -86,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
+     */
+/*
     private View.OnClickListener onClickPlus(final int plusOrMinus) {
         final EditText textOfAmbreeCarnutes33 = findViewById(R.id.numberOfBottles);
 
@@ -103,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
+ */
+/*
     protected View.OnClickListener onClickOk(){
         final EditText textOfAmbreeCarnutes33 = findViewById(R.id.numberOfBottles);
         return new View.OnClickListener() {
@@ -117,6 +125,8 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
+
+ */
     /*protected void calculate(){
         total = nbCarnutesAmbree33*prixCarnutesAmbree33 + nbCarnutesAmbree75*prixCarnutesAmbree75;
 

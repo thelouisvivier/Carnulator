@@ -11,15 +11,24 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.util.List;
+
+import fr.yncrea.carnulator.CarnutesBottle;
+import fr.yncrea.carnulator.MainActivity;
 import fr.yncrea.carnulator.R;
+import fr.yncrea.carnulator.adapter.ContainerAdapter;
+import fr.yncrea.carnulator.async.RetrieveCarnuteAsyncTask;
+import fr.yncrea.carnulator.interfaces.ICarnuteChangeListener;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ContainerFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ContainerFragment extends Fragment /*implements  AdapterView.OnItemClickListener*/  {
+public class ContainerFragment extends Fragment implements ICarnuteChangeListener, AdapterView.OnItemClickListener  {
+
     private ListView mListOfContainer;
+    private RetrieveCarnuteAsyncTask mCarnuteAsyncTask;
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -30,6 +39,7 @@ public class ContainerFragment extends Fragment /*implements  AdapterView.OnItem
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
 
     public ContainerFragment() {
         // Required empty public constructor
@@ -66,13 +76,43 @@ public class ContainerFragment extends Fragment /*implements  AdapterView.OnItem
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        //Log.v("LALALASCHTROUMPF","aie aie");
         View rootView = inflater.inflate(R.layout.fragment_container, container, false);
         mListOfContainer = (ListView) rootView.findViewById(R.id.containerListView);
         //mListOfContainer.setOnItemClickListener(this);
 
-    return rootView;
+        return rootView;
     }
+
+    //BALEC not so sure
+    @Override
+    public void onStart() {
+        super.onStart();
+        mCarnuteAsyncTask = new RetrieveCarnuteAsyncTask(this);
+        mCarnuteAsyncTask.execute();
+
+
+
+    }
+
+    @Override
+    public void onRetrieveBottle(List<CarnutesBottle> carnutesBottles) {
+        if( carnutesBottles != null){
+            // final ArrayAdapter<Tweet> adapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_list_item_1, tweets);
+            // mListView.setAdapter(adapter);
+            final ContainerAdapter adapter = new ContainerAdapter(carnutesBottles);
+            //adapter.setmListener(mTweetListener);
+            mListOfContainer.setAdapter(adapter);
+            for(CarnutesBottle cb : carnutesBottles){
+                Log.d(MainActivity.class.getName(), cb.getM_name());
+            }
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
 
     //@Override
     //public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -84,6 +124,17 @@ public class ContainerFragment extends Fragment /*implements  AdapterView.OnItem
         Tweet tweet = (Tweet) mListView.getItemAtPosition((position));
         if(mTweetListener != null) {
             mTweetListener.onViewTweet(tweet);
+        }
+    }
+
+     */
+    /*
+    //BALEC
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(context instanceof TweetListener){
+            mTweetListener = (TweetListener) context;
         }
     }
 

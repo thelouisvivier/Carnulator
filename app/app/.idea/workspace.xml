@@ -23,6 +23,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1cc8f292-8c32-4290-8803-d9013bc5177c" name="Default Changelist" comment="" />
+  <component name="ChangeListManager">
+    <list default="true" id="78bd1d42-5a71-4e4d-9b71-bc4ea9871ce4" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,6 +45,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
+  <component name="ProjectId" id="1kBxT0KvVrmJAMLbcznSDOv0Wyi" />
   <component name="ProjectId" id="1jv3zPT2i0i9JRaJjG6KpgcukRM" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -52,6 +55,9 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -65,6 +71,19 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+      <changelist id="78bd1d42-5a71-4e4d-9b71-bc4ea9871ce4" name="Default Changelist" comment="" />
+      <created>1605187789542</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1605187789542</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-1180" y="275" key="FileChooserDialogImpl" timestamp="1605187839383">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1180" y="275" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1605187839383" />
       <changelist id="1cc8f292-8c32-4290-8803-d9013bc5177c" name="Default Changelist" comment="" />
       <created>1604670999509</created>
       <option name="number" value="Default" />

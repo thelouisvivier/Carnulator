@@ -61,18 +61,18 @@ public class ContainerAdapter extends BaseAdapter /*implements View.OnClickListe
             convertView = mInflater.inflate(R.layout.carnutes_item,null);
             carnutesType= new Container(convertView);
             convertView.setTag(carnutesType);
+            carnutesType.itemNumberBottle.setText(Integer.toString(0));
         }
         else {
             //holder = (ViewHolder)convertView.getTag();
             carnutesType = (Container)convertView.getTag();
 
         }
-
         final CarnutesBottle carnutesBottle = (CarnutesBottle) getItem(position);
 
         carnutesType.itemTextNameBottle.setText(carnutesBottle.getM_name());
         carnutesType.setPrice(carnutesBottle.getM_price());
-        carnutesType.itemNumberBottle.setText(Integer.toString(0));
+
         carnutesType.m_plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

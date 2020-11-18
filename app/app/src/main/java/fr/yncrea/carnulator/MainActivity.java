@@ -1,18 +1,10 @@
 
 package fr.yncrea.carnulator;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.text.InputType;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.SeekBar;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import fr.yncrea.carnulator.adapter.ContainerAdapter;
 import fr.yncrea.carnulator.fragment.ContainerFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         if(savedInstanceState == null){
             //Toast.makeText(this,"PAUUUUUUUUUUUUUL" , Toast.LENGTH_LONG).show();
             setContentView(R.layout.activity_main);
+
             getSupportFragmentManager().beginTransaction().add(R.id.containerCarnutes,new ContainerFragment()).commit();
         }
 

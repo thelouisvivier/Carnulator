@@ -155,7 +155,6 @@ public class ContainerAdapter extends BaseAdapter {
         if(ContainerAdapter.mContainerList != null ){
             if (ContainerAdapter.mContainerList.size() !=0){
                 for(Container container : ContainerAdapter.mContainerList){
-                    Log.d("TAG", "calculate:"+String.valueOf(container.itemNumberBottle.getText()));
                     total += Integer.valueOf(String.valueOf(container.itemNumberBottle.getText()))*container.getPrice();
                 }
 

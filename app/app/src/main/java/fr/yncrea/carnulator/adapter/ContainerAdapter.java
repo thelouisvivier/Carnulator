@@ -1,27 +1,31 @@
 package fr.yncrea.carnulator.adapter;
 
+import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.SeekBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.yncrea.carnulator.ApplicationActivity;
 import fr.yncrea.carnulator.CarnutesBottle;
 import fr.yncrea.carnulator.Container;
-import fr.yncrea.carnulator.MainActivity;
 import fr.yncrea.carnulator.R;
 
-public class ContainerAdapter extends BaseAdapter /*implements View.OnClickListener*/ {
-    public static List<Container> mContainerList;
+public class ContainerAdapter extends BaseAdapter {
+    public static List<Container> mContainerList = new ArrayList<Container>();;
     public List<CarnutesBottle> mCarnuteList;
+    public static double totalPrice;
 
     private final LayoutInflater mInflater;
-    //private itemListener mListener;
 
     public ContainerAdapter(List<CarnutesBottle> carnuteList) {
         this.mCarnuteList = carnuteList;
@@ -29,11 +33,6 @@ public class ContainerAdapter extends BaseAdapter /*implements View.OnClickListe
     }
 
 
-
-   /* public void setmListener(TweetListener mListener) {
-        this.mListener = mListener;
-    }
-    */
 
 
     @Override
@@ -54,17 +53,21 @@ public class ContainerAdapter extends BaseAdapter /*implements View.OnClickListe
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
+
         //ViewHolder holder;
         Container carnutesType;
         //scrolling
         if(null == convertView){
             convertView = mInflater.inflate(R.layout.carnutes_item,null);
             carnutesType= new Container(convertView);
+
             convertView.setTag(carnutesType);
             carnutesType.itemNumberBottle.setText(Integer.toString(0));
+            carnutesType.itemNumberBottle.setInputType(InputType.TYPE_NUMBER_VARIATION_NORMAL);
+
         }
         else {
-            //holder = (ViewHolder)convertView.getTag();
             carnutesType = (Container)convertView.getTag();
 
         }
@@ -78,7 +81,7 @@ public class ContainerAdapter extends BaseAdapter /*implements View.OnClickListe
             public void onClick(View view) {
 
                 carnutesType.itemNumberBottle.setText(String.valueOf(Integer.valueOf(String.valueOf(carnutesType.itemNumberBottle.getText()))+1));
-                //calculate();
+
                 }
             }
         );
@@ -86,7 +89,7 @@ public class ContainerAdapter extends BaseAdapter /*implements View.OnClickListe
             @Override
             public void onClick(View view) {
                 carnutesType.itemNumberBottle.setText(String.valueOf(Integer.valueOf(String.valueOf(carnutesType.itemNumberBottle.getText()))-1));
-                //calculate();
+
                 }
             }
         );
@@ -94,7 +97,7 @@ public class ContainerAdapter extends BaseAdapter /*implements View.OnClickListe
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 carnutesType.itemNumberBottle.setText(String.valueOf(progress));
-                //calculate();
+
             }
 
             @Override
@@ -109,8 +112,16 @@ public class ContainerAdapter extends BaseAdapter /*implements View.OnClickListe
         carnutesType.m_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                carnutesType.itemNumberBottle.setText(Integer.valueOf(String.valueOf(carnutesType.itemNumberBottle.getText())));
-                //calculate();
+                if(Integer.valueOf(String.valueOf(carnutesType.itemNumberBottle.getText())) < 0){
+                    CharSequence text = "La valeur entree est negative, merci de rentrer un nombre superieur a 0";
+                    Toast toast = Toast.makeText(ApplicationActivity.getContext(), text,Toast.LENGTH_SHORT);
+                    toast.show();
+
+                    carnutesType.itemNumberBottle.setText(Integer.toString(0));
+
+                }
+                calculate();
+                displayTotal(parent.getRootView());
             }
         });
 
@@ -123,55 +134,44 @@ public class ContainerAdapter extends BaseAdapter /*implements View.OnClickListe
             Picasso.get().load(carnutesBottle.getM_imageUrl()).fit().into(carnutesType.imgItem);
         }
 
-        //carnutesType.setPrice(carnutesBottle.getM_price());
 
-        //carnutesType.m_bottle.setName(carnutesBottle.getM_name());
 
-        //holder.name.setText(tweet.user.name);
-        //holder.alias.setText(tweet.user.screenName);
-        //holder.text.setText(tweet.text);
-        //holder.button.setTag(position);
-        //holder.button.setOnClickListener(this);
+        for (int i = 0; i < ContainerAdapter.mContainerList.size(); i++  ) {
+            if(ContainerAdapter.mContainerList.get(i).itemTextNameBottle == carnutesType.itemTextNameBottle){
+                ContainerAdapter.mContainerList.get(i).itemNumberBottle = carnutesType.itemNumberBottle;
+                return convertView;
+            }
+        }
 
-        //if(!tweet.user.profileImageUrl.isEmpty()){
-        //    Picasso.get().load(tweet.user.profileImageUrl).fit().into(holder.image);
-        //}
+        ContainerAdapter.mContainerList.add(carnutesType);
 
         return convertView;
     }
 
     //Calculate total price of all bottles
-    /*
-    public static double calculate(){
+
+    public static void calculate(){
         double total = 0;
-        for(Container container : mContainerList){
-            total += Integer.valueOf(String.valueOf(container.itemNumberBottle.getText()))*container.getPrice();
+        if(ContainerAdapter.mContainerList != null ){
+            if (ContainerAdapter.mContainerList.size() !=0){
+                for(Container container : ContainerAdapter.mContainerList){
+                    Log.d("TAG", "calculate:"+String.valueOf(container.itemNumberBottle.getText()));
+                    total += Integer.valueOf(String.valueOf(container.itemNumberBottle.getText()))*container.getPrice();
+                }
+
+            }
+
         }
-        return total;
+        totalPrice = total;
+
+
     }
 
-     */
-/*
-    public void displayTotal(){
-        .setSubtitle("TOTAL : " + String.valueOf(calculate()) + " €");
-        totalEditText.setText(String.valueOf(total));
+
+    public void displayTotal(View view){
+        TextView display = (TextView) view.findViewById(R.id.displayTotal);
+        display.setText("Prix total : "+ ContainerAdapter.totalPrice + "€");
     }
-
- */
-
-
-
-/*
-    @Override
-    public void onClick(View v) {
-        int position = (Integer) v.getTag();
-        if(null != mListener){
-            final Tweet tweet = (Tweet) getItem(position);
-            mListener.onRetweet(tweet);
-        }
-    }
-
-   */
 
 
 }

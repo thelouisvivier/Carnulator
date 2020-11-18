@@ -102,9 +102,7 @@ public class ContainerFragment extends Fragment implements ICarnuteChangeListene
             final ContainerAdapter adapter = new ContainerAdapter(carnutesBottles);
             //adapter.setmListener(mTweetListener);
             mListOfContainer.setAdapter(adapter);
-            for(CarnutesBottle cb : carnutesBottles){
-                Log.d(MainActivity.class.getName(), cb.getM_name());
-            }
+
         }
     }
 

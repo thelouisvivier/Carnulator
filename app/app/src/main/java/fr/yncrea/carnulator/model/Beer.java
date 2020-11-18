@@ -20,4 +20,27 @@ public class Beer {
     public Integer size;
     public Float price;
     public String image;
+
+    public Float getPrice() {
+        return price;
+    }
+
+    @NonNull
+    public String getId() {
+        return id;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Integer getSize() {
+        return size;
+    }
+
+
 }

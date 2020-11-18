@@ -15,6 +15,7 @@ public interface BeersDao {
     @Query("select * from Beer")
     List<Beer> getAllBeers();
 
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Beer beer);
 }

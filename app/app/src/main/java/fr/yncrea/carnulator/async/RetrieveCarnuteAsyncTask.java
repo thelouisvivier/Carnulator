@@ -20,7 +20,7 @@ public class RetrieveCarnuteAsyncTask extends AsyncTask<String, Void, List<Carnu
         //List<Beer> beers = db.BeersDao().getAllBeers();
         //if((strings != null) && (strings.length > 0)){
         //    return CarnutesBottle.getListOfBottle();
-            //return TwitterHelper.getTweetsOfUser(strings[0]);
+        //return TwitterHelper.getTweetsOfUser(strings[0]);
         //}
         return CarnutesBottle.getListOfBottle();
     }

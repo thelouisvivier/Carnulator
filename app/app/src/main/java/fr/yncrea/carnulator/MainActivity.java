@@ -1,18 +1,13 @@
-
 package fr.yncrea.carnulator;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.widget.TextView;
 import android.os.Environment;
-import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.SeekBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -46,22 +41,17 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.element.Text;
 import com.itextpdf.layout.property.TextAlignment;
 
-import fr.yncrea.carnulator.adapter.ContainerAdapter;
 import fr.yncrea.carnulator.fragment.ContainerFragment;
 
 import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicReference;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class MainActivity extends AppCompatActivity {
 
-    private double prixCarnutesAmbree33 = 2;
-    private int nbCarnutesAmbree33 = 0;
-    private double prixCarnutesAmbree75 = 2.7;
-    private int nbCarnutesAmbree75 = 0;
-    private double total = 0;
 
 
     // PDF GENERATION UTILITIES //
@@ -80,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
     // API UTILITIES //
     private BeersDatabase db;
+    public static List<Beer> beerList;
     private CarnutesApiService carnutesApiService;
     private Executor backgroundExecutor = Executors.newSingleThreadExecutor();
 
@@ -87,12 +78,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(savedInstanceState == null){
 
-            setContentView(R.layout.activity_main);
 
-            getSupportFragmentManager().beginTransaction().add(R.id.containerCarnutes,new ContainerFragment()).commit();
-        }
 
         // ********  BEGIN API PART ******** //
         Retrofit retrofit = new Retrofit.Builder()
@@ -106,9 +93,26 @@ public class MainActivity extends AppCompatActivity {
             db = Room.databaseBuilder(getApplicationContext(), BeersDatabase.class, "beers_database.db").build();
         });
 
+
         backgroundExecutor.execute(()-> {
             loadFromApiAndSave();
+            beerList = db.BeersDao().getAllBeers();
+
+            runOnUiThread(() -> {
+                if(savedInstanceState == null){
+
+                    setContentView(R.layout.activity_main);
+
+                    getSupportFragmentManager().beginTransaction().add(R.id.containerCarnutes,new ContainerFragment()).commit();
+                }
+            });
+
+
         });
+
+
+
+
         // ********  END API PART ******** //
 
 
@@ -118,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
         // bougez le ou vous voulez et appelez le "pdfButton"
         setContentView(R.layout.activity_main);
         //initializing button
-        mSaveBtn = findViewById(R.id.pdfButton);
+        mSaveBtn = findViewById(R.id.exportButton);
 
         //handle button click
         mSaveBtn.setOnClickListener(new View.OnClickListener() {

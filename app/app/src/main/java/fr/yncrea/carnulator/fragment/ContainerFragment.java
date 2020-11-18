@@ -1,10 +1,11 @@
 package fr.yncrea.carnulator.fragment;
 
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,6 @@ import android.widget.ListView;
 import java.util.List;
 
 import fr.yncrea.carnulator.CarnutesBottle;
-import fr.yncrea.carnulator.MainActivity;
 import fr.yncrea.carnulator.R;
 import fr.yncrea.carnulator.adapter.ContainerAdapter;
 import fr.yncrea.carnulator.async.RetrieveCarnuteAsyncTask;
@@ -94,12 +94,14 @@ public class ContainerFragment extends Fragment implements ICarnuteChangeListene
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onRetrieveBottle(List<CarnutesBottle> carnutesBottles) {
         if( carnutesBottles != null){
             // final ArrayAdapter<Tweet> adapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_list_item_1, tweets);
             // mListView.setAdapter(adapter);
-            final ContainerAdapter adapter = new ContainerAdapter(carnutesBottles);
+            //final ContainerAdapter adapter = new ContainerAdapter(carnutesBottles);
+            final ContainerAdapter adapter = new ContainerAdapter();
             //adapter.setmListener(mTweetListener);
             mListOfContainer.setAdapter(adapter);
 

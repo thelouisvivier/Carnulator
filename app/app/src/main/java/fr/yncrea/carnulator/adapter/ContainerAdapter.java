@@ -1,5 +1,6 @@
 package fr.yncrea.carnulator.adapter;
 
+import android.os.Build;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
+
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -18,17 +21,20 @@ import java.util.List;
 import fr.yncrea.carnulator.ApplicationActivity;
 import fr.yncrea.carnulator.CarnutesBottle;
 import fr.yncrea.carnulator.Container;
+import fr.yncrea.carnulator.MainActivity;
 import fr.yncrea.carnulator.R;
+import fr.yncrea.carnulator.model.Beer;
 
 public class ContainerAdapter extends BaseAdapter {
     public static List<Container> mContainerList = new ArrayList<Container>();;
-    public List<CarnutesBottle> mCarnuteList;
+    public List<Beer> mCarnuteList;
     public static double totalPrice;
 
     private final LayoutInflater mInflater;
 
-    public ContainerAdapter(List<CarnutesBottle> carnuteList) {
-        this.mCarnuteList = carnuteList;
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public ContainerAdapter() {
+        this.mCarnuteList = MainActivity.beerList;
         this.mInflater = LayoutInflater.from(ApplicationActivity.getContext());
     }
 
@@ -55,10 +61,11 @@ public class ContainerAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
 
-        //ViewHolder holder;
+        //"ViewHolder holder;" be like : we set the holder to display our data
         Container carnutesType;
         //scrolling
         if(null == convertView){
+            //inflate the list with an item
             convertView = mInflater.inflate(R.layout.carnutes_item,null);
             carnutesType= new Container(convertView);
 
@@ -71,10 +78,11 @@ public class ContainerAdapter extends BaseAdapter {
             carnutesType = (Container)convertView.getTag();
 
         }
-        final CarnutesBottle carnutesBottle = (CarnutesBottle) getItem(position);
+        final Beer carnutesBottle = (Beer) getItem(position);
 
-        carnutesType.itemTextNameBottle.setText(carnutesBottle.getM_name());
-        carnutesType.setPrice(carnutesBottle.getM_price());
+        //set variables of the holder
+        carnutesType.itemTextNameBottle.setText(carnutesBottle.getName()+' '+String.valueOf(carnutesBottle.getSize())+" cL");
+        carnutesType.setPrice(carnutesBottle.getPrice());
 
         carnutesType.m_plus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +117,7 @@ public class ContainerAdapter extends BaseAdapter {
             }
         }
         );
+        //when "ok" is clicked for an element, updates the total price
         carnutesType.m_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,17 +134,19 @@ public class ContainerAdapter extends BaseAdapter {
             }
         });
 
+        //set the tag of every component
         carnutesType.m_ok.setTag(position);
         carnutesType.m_minus.setTag(position);
         carnutesType.m_plus.setTag(position);
         carnutesType.m_seekBar.setTag(position);
 
-        if(!carnutesBottle.getM_imageUrl().isEmpty()){
-            Picasso.get().load(carnutesBottle.getM_imageUrl()).fit().into(carnutesType.imgItem);
+        //get image
+        if(!carnutesBottle.getImage().isEmpty()){
+            Picasso.get().load("https://carnulator-b911.restdb.io/media/"+carnutesBottle.getImage()).fit().into(carnutesType.imgItem);
         }
 
 
-
+        //add the element in the list of element if it's not already in it
         for (int i = 0; i < ContainerAdapter.mContainerList.size(); i++  ) {
             if(ContainerAdapter.mContainerList.get(i).itemTextNameBottle == carnutesType.itemTextNameBottle){
                 ContainerAdapter.mContainerList.get(i).itemNumberBottle = carnutesType.itemNumberBottle;
@@ -166,7 +177,7 @@ public class ContainerAdapter extends BaseAdapter {
 
     }
 
-
+//Display the total price
     public void displayTotal(View view){
         TextView display = (TextView) view.findViewById(R.id.displayTotal);
         display.setText("Prix total : "+ ContainerAdapter.totalPrice + "€");

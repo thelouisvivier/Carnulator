@@ -51,17 +51,6 @@ public class CarnutesBottle {
                 listOfCarnutesBottles.add(new fr.yncrea.carnulator.CarnutesBottle("Carnutes " + t + " " + c + "cL",2,"https://carnutes.pagesperso-orange.fr/WEFiles/Image/WEImage/ambree33-b97fe29b.png"));
             }
         }
-        /*
-        listOfCarnutesBottles.add(new CarnutesBottle("Carnutes Rousse 33cL",2,"rousse33"));
-        listOfCarnutesBottles.add(new CarnutesBottle("Carnutes Rousse 75cL",4,"rousse75"));
-        listOfCarnutesBottles.add(new CarnutesBottle("Carnutes Blonde 33cL",2,"blonde33"));
-        listOfCarnutesBottles.add(new CarnutesBottle("Carnutes Blonde 75cL",4,"blonde75"));
-        listOfCarnutesBottles.add(new CarnutesBottle("Carnutes Ambrée 33cL",2,"ambree33"));
-        listOfCarnutesBottles.add(new CarnutesBottle("Carnutes Ambrée 75cL",4,"ambree75"));
-        listOfCarnutesBottles.add(new CarnutesBottle("Carnutes Triple 33cL",2.5,"triple33"));
-        listOfCarnutesBottles.add(new CarnutesBottle("Carnutes Triple 75cL",5,"triple75"));
-        listOfCarnutesBottles.add(new CarnutesBottle("Carnutes Brune 33cL",2.5,"brune33"));
-        listOfCarnutesBottles.add(new CarnutesBottle("Carnutes Brune 75cL",5,"brune75"));*/
 
         return listOfCarnutesBottles;
     }

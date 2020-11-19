@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.room.Room;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -48,8 +49,6 @@ import fr.yncrea.carnulator.fragment.ContainerFragment;
 import java.io.FileOutputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicReference;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class MainActivity extends AppCompatActivity {
@@ -63,12 +62,14 @@ public class MainActivity extends AppCompatActivity {
     Button mSaveBtn;
 
     // generated data
-    Random random = new Random();
-    int factureRef = 0;
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     LocalDate date =  LocalDate.now();
     String today = dtf.format(date);
     String nextMonth = dtf.format(date.plusMonths(1));
+
+    LocalDateTime monthDay = LocalDateTime.now();
+    DateTimeFormatter factureFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
+    String factureRef = factureFormatter.format(monthDay);
 
     // API UTILITIES //
     private BeersDatabase db;
@@ -150,8 +151,8 @@ public class MainActivity extends AppCompatActivity {
 
     // ********  BEGIN PDF GENERATION PART ******** //
     private void savePdf(){
-        factureRef = random.nextInt(999) + 1;
-        String mFileName = "Document-" + factureRef;
+        factureRef = factureFormatter.format(monthDay);
+        String mFileName =  factureRef;
         String mPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + mFileName + ".pdf";
         PdfWriter writer;
 

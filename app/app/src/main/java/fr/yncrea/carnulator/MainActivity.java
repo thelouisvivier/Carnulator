@@ -104,51 +104,41 @@ public class MainActivity extends AppCompatActivity {
                     setContentView(R.layout.activity_main);
 
                     getSupportFragmentManager().beginTransaction().add(R.id.containerCarnutes,new ContainerFragment()).commit();
+
+                    // ********  BEGIN PDF GENERATION PART ******** //
+                    mSaveBtn = findViewById(R.id.exportButton);
+
+                    //handle button click
+                    mSaveBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            // version
+                            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
+                                // check storage permission
+                                if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                                    String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                                    requestPermissions(permissions, STORAGE_CODE);
+                                }
+
+                                else {
+                                    savePdf();
+
+                                }
+                            }
+                            else {
+                                savePdf();
+                            }
+
+                        }
+                    });
+                    // ********  END PDF GENERATION PART ******** //
                 }
             });
 
 
         });
-
-
-
-
         // ********  END API PART ******** //
-
-
-        // ********  BEGIN PDF GENERATION PART ******** //
-        //LIRE ICI
-        // ceci est une vue temporaire jsp où mettre le bouton !
-        // bougez le ou vous voulez et appelez le "pdfButton"
-        setContentView(R.layout.activity_main);
-        //initializing button
-        mSaveBtn = findViewById(R.id.exportButton);
-
-        //handle button click
-        mSaveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                // version
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
-                    // check storage permission
-                    if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-                        String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
-                        requestPermissions(permissions, STORAGE_CODE);
-                    }
-
-                    else {
-                        savePdf();
-
-                    }
-                }
-                else {
-                    savePdf();
-                }
-
-            }
-        });
-        // ********  END PDF GENERATION PART ******** //
     }
 
     @Override

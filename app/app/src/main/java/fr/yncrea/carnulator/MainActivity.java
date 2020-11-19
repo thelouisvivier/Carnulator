@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.room.Room;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import fr.yncrea.carnulator.adapter.ContainerAdapter;
 import fr.yncrea.carnulator.api.CarnutesApiService;
 import fr.yncrea.carnulator.database.BeersDatabase;
 import fr.yncrea.carnulator.model.Beer;
@@ -185,16 +187,16 @@ public class MainActivity extends AppCompatActivity {
             table.addCell(new Cell().add("Total HT").setBackgroundColor(Color.RED).setFontColor(Color.WHITE).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER).setBold());
             table.setFontSize(15);
 
-            //FONCTION REMPLISSAGE
-            //fillBill();
+            // remplissage auto
+            fillBill(table);
 
 
             // creating bottom table
             float [] arrangedPointColumnWidths = {700F,300F};
             Table bottomTable = new Table(arrangedPointColumnWidths);
             // creating cells
-            bottomTable.addCell(new Cell().add("Mode de régelment : Virement \n Echeance de paiement : " + nextMonth +"  \n Réglements :").setBorder(Border.NO_BORDER));
-            bottomTable.addCell(new Cell().add("Total HT \nRéglements :\nNet à payer : ").setBorder(Border.NO_BORDER).setBackgroundColor(Color.RED).setFontColor(Color.WHITE));
+            bottomTable.addCell(new Cell().add("Mode de réglement : Virement \n Echeance de paiement : " + nextMonth +"  \n Réglements :").setBorder(Border.NO_BORDER));
+            bottomTable.addCell(new Cell().add("Total HT " + ContainerAdapter.totalPrice+ "\nRéglements :\nNet à payer : ").setBorder(Border.NO_BORDER).setBackgroundColor(Color.RED).setFontColor(Color.WHITE));
             bottomTable.addCell(new Cell().add("\n\n\nTVA non applicable, article 293B du CGI").setBorder(Border.NO_BORDER));
             bottomTable.setFixedPosition(40,40,500).setFontSize(15);
 
@@ -224,7 +226,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // fill bill with data
-    private void fillBill() {
+    private void fillBill(Table table) {
+        boolean alternColors = true;
+        for (Container i : ContainerAdapter.mContainerList){
+            if (Integer.valueOf(String.valueOf(i.itemNumberBottle.getText())) > 0) {
+                String total = String.valueOf(Integer.valueOf(String.valueOf(i.itemNumberBottle.getText()))*i.getPrice());
+                if (alternColors == true) {
+                    table.addCell(new Cell().add("No id").setBackgroundColor(Color.YELLOW).setFontColor(Color.BLACK).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER).setBold());
+                    table.addCell(new Cell().add(String.valueOf(i.itemTextNameBottle.getText())).setBackgroundColor(Color.YELLOW).setFontColor(Color.BLACK).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER).setBold());
+                    table.addCell(new Cell().add("U").setBackgroundColor(Color.YELLOW).setFontColor(Color.BLACK).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER).setBold());
+                    table.addCell(new Cell().add(String.valueOf(i.itemNumberBottle.getText())).setBackgroundColor(Color.YELLOW).setFontColor(Color.BLACK).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER).setBold());
+                    table.addCell(new Cell().add(String.valueOf(i.getPrice())).setBackgroundColor(Color.YELLOW).setFontColor(Color.BLACK).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER).setBold());
+                    table.addCell(new Cell().add(total).setBackgroundColor(Color.YELLOW).setFontColor(Color.BLACK).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER).setBold());
+                    alternColors = false;
+                }
+                else {
+                    table.addCell(new Cell().add("No id").setFontColor(Color.BLACK).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER).setBold());
+                    table.addCell(new Cell().add(String.valueOf(i.itemTextNameBottle.getText())).setFontColor(Color.BLACK).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER).setBold());
+                    table.addCell(new Cell().add("U").setFontColor(Color.BLACK).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER).setBold());
+                    table.addCell(new Cell().add(String.valueOf(i.itemNumberBottle.getText())).setFontColor(Color.BLACK).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER).setBold());
+                    table.addCell(new Cell().add(String.valueOf(i.getPrice())).setFontColor(Color.BLACK).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER).setBold());
+                    table.addCell(new Cell().add(total).setFontColor(Color.BLACK).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER).setBold());
+                    alternColors = true;
+                }
+
+
+
+            }
+
+        }
     }
 
     //handle permission result

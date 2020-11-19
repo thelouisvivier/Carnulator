@@ -64,7 +64,7 @@ public class ContainerAdapter extends BaseAdapter {
         //"ViewHolder holder;" be like : we set the holder to display our data
         Container carnutesType;
         //scrolling
-        if(null == convertView){
+        if (mContainerList.size() <= mCarnuteList.size() ) {
             //inflate the list with an item
             convertView = mInflater.inflate(R.layout.carnutes_item,null);
             carnutesType= new Container(convertView);
@@ -72,6 +72,56 @@ public class ContainerAdapter extends BaseAdapter {
             convertView.setTag(carnutesType);
             carnutesType.itemNumberBottle.setText(Integer.toString(0));
             carnutesType.itemNumberBottle.setInputType(InputType.TYPE_NUMBER_VARIATION_NORMAL);
+            
+            carnutesType.m_plus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    carnutesType.itemNumberBottle.setText(String.valueOf(Integer.valueOf(String.valueOf(carnutesType.itemNumberBottle.getText()))+1));
+
+                    }
+                }
+            );
+            carnutesType.m_minus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    carnutesType.itemNumberBottle.setText(String.valueOf(Integer.valueOf(String.valueOf(carnutesType.itemNumberBottle.getText()))-1));
+
+                    }
+                }
+            );
+            carnutesType.m_seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    carnutesType.itemNumberBottle.setText(String.valueOf(progress));
+
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                }
+            }
+            );
+            //when "ok" is clicked for an element, updates the total price
+            carnutesType.m_ok.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(Integer.valueOf(String.valueOf(carnutesType.itemNumberBottle.getText())) < 0){
+                        CharSequence text = "La valeur entree est negative, merci de rentrer un nombre superieur a 0";
+                        Toast toast = Toast.makeText(ApplicationActivity.getContext(), text,Toast.LENGTH_SHORT);
+                        toast.show();
+
+                        carnutesType.itemNumberBottle.setText(Integer.toString(0));
+
+                    }
+                    calculate();
+                    displayTotal(parent.getRootView());
+                }
+            });
 
         }
         else {
@@ -84,55 +134,6 @@ public class ContainerAdapter extends BaseAdapter {
         carnutesType.itemTextNameBottle.setText(carnutesBottle.getName()+' '+String.valueOf(carnutesBottle.getSize())+" cL");
         carnutesType.setPrice(carnutesBottle.getPrice());
 
-        carnutesType.m_plus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                carnutesType.itemNumberBottle.setText(String.valueOf(Integer.valueOf(String.valueOf(carnutesType.itemNumberBottle.getText()))+1));
-
-                }
-            }
-        );
-        carnutesType.m_minus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                carnutesType.itemNumberBottle.setText(String.valueOf(Integer.valueOf(String.valueOf(carnutesType.itemNumberBottle.getText()))-1));
-
-                }
-            }
-        );
-        carnutesType.m_seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                carnutesType.itemNumberBottle.setText(String.valueOf(progress));
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-        }
-        );
-        //when "ok" is clicked for an element, updates the total price
-        carnutesType.m_ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(Integer.valueOf(String.valueOf(carnutesType.itemNumberBottle.getText())) < 0){
-                    CharSequence text = "La valeur entree est negative, merci de rentrer un nombre superieur a 0";
-                    Toast toast = Toast.makeText(ApplicationActivity.getContext(), text,Toast.LENGTH_SHORT);
-                    toast.show();
-
-                    carnutesType.itemNumberBottle.setText(Integer.toString(0));
-
-                }
-                calculate();
-                displayTotal(parent.getRootView());
-            }
-        });
 
         //set the tag of every component
         carnutesType.m_ok.setTag(position);

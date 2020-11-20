@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Carnulator</string>
+    <string name="Image_Carnutes_Blonde_33">Image Carnutes Blonde 33cL </string>
+    <string name="Image_Carnutes_Ambree_33">Image Carnutes Ambrée 33cL </string>
+    <string name="Image_Carnutes_Ambree_75">Image Carnutes Ambrée 75cL </string>
+    <string name="Image_Carnutes_Blonde_75">Image Carnutes Blonde 75cL </string>
+    <string name="ok">OK</string>
+    <string name="export">Export</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/carnutesListItem"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="363dp"
+        android:layout_height="145dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp"
+        android:background="#5FFFFA"
+        android:backgroundTint="#45B4FF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageViewItem"
+            android:layout_width="128dp"
+            android:layout_height="79dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="16dp"
+            android:background="#FFFFFF"
+            android:contentDescription="@string/Image_Carnutes_Ambree_33"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/minusButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ambree33" />
+
+        <Button
+            android:id="@+id/okButton"
+            android:layout_width="53dp"
+            android:layout_height="53dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="#FFFFFF"
+            android:text="@string/ok"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <SeekBar
+            android:id="@+id/seekBarNumberOfBottle"
+            android:layout_width="182dp"
+            android:layout_height="19dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="20dp"
+            android:max="200"
+            android:progress="10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/numberOfBottles"
+            android:layout_width="52dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginBottom="16dp"
+            android:autofillHints="0"
+            android:ems="10"
+            android:inputType="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/plusButton"
+            app:layout_constraintStart_toEndOf="@+id/minusButton" />
+
+        <TextView
+            android:id="@+id/itemTextNameBottle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="Carnutes Ambrée 33 cL"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_constraintEnd_toStartOf="@+id/seekBarNumberOfBottle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/minusButton"
+            android:layout_width="39dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginBottom="24dp"
+            android:text="-"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/numberOfBottles"
+            app:layout_constraintStart_toEndOf="@+id/imageViewItem" />
+
+        <Button
+            android:id="@+id/plusButton"
+            android:layout_width="39dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginBottom="24dp"
+            android:text="+"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/okButton"
+            app:layout_constraintStart_toEndOf="@+id/numberOfBottles" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -52,6 +52,17 @@ public class Container {
 
     }
 
+    public Container(Container c){
+        m_seekBar = c.m_seekBar;
+        imgItem = c.imgItem;
+        itemTextNameBottle = c.itemTextNameBottle;
+        itemNumberBottle = c.itemNumberBottle;
+        m_ok = c.m_ok;
+        m_plus = c.m_plus;
+        m_minus = c.m_minus;
+
+    }
+
     public void setPrice(double price) {
         this.price = price;
     }
